@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pitcher Idea</title>
+    <script src="js/jquery-1.8.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+        </script>
+        <script>
+            $(document).ready(function(){
+                $("#btnListIdea").click(function(){
+                    //alert();
+                    var emailVal=$("#email").val();
+                    var categoryVal = $("#category").val();
+                    var ideatitleVal=$("#ideatitle").val();
+                    var howitworks=$("#howitworks").val();
+                    var investmentVal=$("#investment").val();
+                    var incomeVal=$("#presentincome").val();
+                    var startedVal=$("#started").val();
+                    var fundVal=null;
+                    var shareHolders=$("#shareholders").val();
+                    var infoVal=$("#info").val();
+
+                    var url="/pitcherideasave?email="+emailVal+"&category="+categoryVal+"&ideatitle="+ideatitleVal+"&howitworks="+howitworks+"&investment="+investmentVal+"&income="+incomeVal+"&started="+startedVal+"&fund="+fundVal+"&shareholders="+shareHolders+"&info="+infoVal;
+
+                    //alert(url);
+
+                    $.get(url,function(resp){
+                        alert(resp);
+                    })
+                })
+            })
+        </script>
+</head>
+
+<body>
+    <nav class="navbar bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand">Pitcher Idea</a>
+        </div>
+    </nav>
+    <div class="container">
+        <form class="row g-3">
+            <div class="col-md-12">
+                <label for="email" class="form-label">Email Id</label>
+                <input type="email" class="form-control" id="email">
+            </div> 
+            <div class="col-md-6">
+                <label for="category" class="form-label">Category</label>
+                <input type="text" class="form-control" id="category" name="category">
+            </div>
+            <div class="col-md-6">
+                <label for="ideatitle" class="form-label">Idea Title</label>
+                <input type="text" class="form-control" id="ideatitle" name="ideatitle" >
+            </div>
+            <label for="howitworks" class="form-label">How It Works?</label>
+            <textarea rows="5" cols="10" id="howitworks" name="howitworks"></textarea>
+            <div class="col-md-4">
+                <label for="investment" class="form-label">Investment Required</label>
+                <input type="text" class="form-control" name="investment" id="investment">
+            </div>
+            <div class="col-md-4">
+                <label for="presentincome" class="form-label">Present Income</label>
+                <input type="text" class="form-control" name="presentincome" id="presentincome">
+            </div>
+            <div class="col-md-4">
+                <label for="started" class="form-label">Started In</label>
+                <input type="text" class="form-control" name="started" id="started">
+            </div>
+            <div class="col-md-2">
+                <label for="fundraised" id="fundraised" name="fundraised" class="form-label">Already Fund Raised?</label>
+                <br>
+                <input type="radio" value="Yes" name="radio">Yes 
+                <input type="radio" value="No" name="radio">No
+            </div>
+            <div class="col-md-10">
+                <label for="shareholders" class="form-label">No. of Share Holders</label>
+                <input type="text" class="form-control" name="shareholders" id="shareholders">
+            </div>
+            <div>
+                <img id="preview" src="">
+            </div>
+            <!-- <div class="col-md-12" > -->
+            <label for="info">Other Info.</label>
+            <textarea cols="10" rows="5" id="info" name="info"></textarea>
+            <!-- </div> -->
+            <div class="col-12">
+                <center>
+                    <input type="button" id="btnListIdea" class="btn btn-primary" value="List Idea">
+                </center>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

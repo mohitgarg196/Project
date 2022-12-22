@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile-Investor</title>
+  <link rel = "icon " href = "pics/inves.jpg">
+
+  <script src="js/jquery-1.8.2.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+  <script>
+    $(document).ready(function () {
+      $("#btnSend").click(function () {
+        var email = $("#email").val();
+        var name = $("#name").val();
+        var city = $("#city").val();
+        var category = $("#category").val();
+        var address = $("#address").val();
+        var contact = $("#contact").val();
+        var bussiness = $("#bussiness").val();
+        var turnover = $("#turnover").val();
+        var investment = $("#investment").val();
+
+        var urlKuch = "/investorsave?email=" + email + "&name=" + name + "&city=" + city + "&category=" + category + "&address=" + address + "&contact=" + contact + "&bussiness=" + bussiness + "&turnover=" + turnover + "&investment=" + investment;
+        alert(urlKuch);
+        $.get(urlKuch, function (resp) {
+          alert(resp);
+        })
+      });
+      $("#btnSearch").click(function () {
+        var email = $("#email").val();
+
+        var urlKuch = "searchinvestor?email=" + email;
+        alert(urlKuch);
+        $.getJSON(urlKuch, function (respJSON) {
+          alert(respJSON);
+          if (respJson.length == 0) {
+            alert("Invalid Email ID");
+          }
+          else {
+            $("#email").val(respJSON[0].email);
+            $("#name").val(respJSON[0].name);
+            $("#city").val(respJSON[0].city);
+            $("#category").val(respJSON[0].category);
+            $("#address").val(respJSON[0].address);
+            $("#contact").val(respJSON[0].contact);
+            $("#bussiness").val(respJSON[0].bussiness);
+            $("#turnover").val(respJSON[0].turnover);
+            $("#investment").val(respJSON[0].investment);
+          }
+        })
+      })
+    })
+
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <b> Investor </b>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success">Search</button>
+      </form>
+    </div>
+    </div>
+  </nav>
+  <div class="container">
+    <center>
+      <h1>Investor Profile</h1>
+    </center>
+    <form>
+      <div class="row">
+        <div class="mb-3 col-md-8">
+          <label for="exampleInputEmail1" class="form-label">Email Id</label>
+          <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+        </div>
+        <div class="col-md-3">
+          <p></p>
+          <button type="button" class="btn btn-primary" id="btnSearch">Search</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="exampleInputEmail1" class="form-label">Name</label>
+          <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3 col-md-3">
+          <label for="exampleInputEmail1" class="form-label">City</label>
+          <input type="text" class="form-control" name="city" id="city" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3 col-md-3">
+          <label for="exampleInputEmail1" class="form-label">Category</label>
+          <input type="text" class="form-control" name="category" id="category" aria-describedby="emailHelp">
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-md-7">
+          <label for="exampleInputEmail1" class="form-label">Address</label>
+          <input type="text" class="form-control" name="address" id="address" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3 col-md-5">
+          <label for="exampleInputEmail1" class="form-label">Contact</label>
+          <input type="text" class="form-control" name="contact" id="contact" aria-describedby="emailHelp">
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-md-8">
+          <label for="exampleInputEmail1" class="form-label">Bussiness/Company</label>
+          <input type="text" class="form-control" name="bussiness" id="bussiness" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3 col-md-4">
+          <label for="exampleInputEmail1" class="form-label">Turnover</label>
+          <input type="text" class="form-control" name="turnover" id="turnover" aria-describedby="emailHelp">
+        </div>
+      </div>
+      <div class="mb-3 col-md-12">
+        <label for="exampleInputEmail1" class="form-label">Invested in Prev. Companies</label>
+        <input type="text" class="form-control" name="investment" id="investment" aria-describedby="emailHelp">
+      </div>
+      <center>
+        <button type="submit" id="btnSend" class="btn btn-primary">Send to Server</button>
+        <button type="submit" id="btnModify" class="btn btn-primary">Modify</button>
+      </center>
+    </form>
+  </div>
+</body>
+
+</html>

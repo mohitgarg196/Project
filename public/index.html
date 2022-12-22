@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shark Tank</title>
+  <link rel = "icon " href = "pics/shark.jpg">
+  <script src="js/jquery-1.8.2.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+  <script>
+    $(document).ready(function () {
+      // -----------------------------------------AJAX-----------------------------------
+      $("#btnsignup").click(function () {
+        // alert();
+        var signupemailval = $("#signupemail").val();
+        var signuppasswordval = $("#signuppassword").val();
+        var typeval = $("#type").val();
+        var urlKuch = "/savethedata?signupemail=" + signupemailval + "&signuppassword=" + signuppasswordval + "&type=" + typeval;
+        //YAHA UPAR WALI LINE MEIN SIGNUPEMAIL,SIGNUPPASSWORD AUR TYPE NAME HAI COLUMNS KE ...
+        $.get(urlKuch, function (resp) {
+          alert(resp);
+        })
+      })
+      $("#btnlogin").click(function () {
+        var loginemailval = $("#loginemail").val();
+        var loginpasswordval = $("#loginpassword").val();
+        var urlKuch = "/jsonlogin?loginemail=" + loginemailval + "&loginpassword=" + loginpasswordval;
+        //  ------------------------------------------JSON------------------------------
+        $.getJSON(urlKuch, function (respJSON) {
+          //alert("hiiiiiiiiiii");
+          //alert(respJSON);
+          // if (resp == 'pitcher') {
+          //   $("#btnlogin").prop("href", "/dash-pitcher.html");
+          // }
+          // else {
+          //   $("#btnlogin").prop("href", "/dash-investor.html");
+          // }
+          // if (resp == "pitcher" || resp == "investor") {
+          //   alert(resp);
+          //   alert("Welcome " + loginemailval);
+          //   if (resp == "pitcher") {
+            //     $("#btnlogin").prop("href", "/dash-pitcher.html");
+            //   }
+            //   else {
+              //     $("#btnlogin").prop("href", "/dash-investor.html");
+              //   }
+              // }
+              if (respJSON.length == 1) {
+                alert("Welcome " + loginemailval);
+                if (respJSON[0].type == "pitcher") {
+                  location.href = "dash-pitcher.html";
+                }
+                else if (respJSON[0].type == "investor") {
+              location.href = "dash-investor.html";
+            }
+          }
+          else {
+            alert("Invalid Email Id/Password");
+          }
+        })
+      })
+    })
+  </script>
+
+</head>
+
+<body id="login-page">
+  <form>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Shark Tank.com 🦈</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">&nbsp;&nbsp;&nbsp;</a>
+            </li>
+            <!-- <li class="nav-item dropdown"> -->
+              <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" -->
+                <!-- aria-expanded="false"> -->
+                &nbsp;&nbsp;&nbsp;&nbsp;
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a class="dropdown-item" href="#">&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">&nbsp;&nbsp;&nbsp;  &nbsp;</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </li>
+            <li>
+              <!-- <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              </form> -->
+        </div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupmodal">
+          SignUp
+        </button>
+        &nbsp;
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginmodal">
+          Login
+        </button>
+        </li>
+      </div>
+      </ul>
+    </nav>
+    <div class="container">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="pics/invest.jpg" style="height:550px " class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="pics/investing.jpg" style="height:550px" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="pics/investor.jpg" style="height:550px" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <p></p>
+      <p></p>
+      <hr>
+      <center>
+        <h1>Our Services</h1>
+      </center>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div class="card" style="width: 12rem; border:0px">
+              <center>
+                <img src="pics/lightbulb.png" class="card-img-top" alt="...">
+                <div class="card-body" style="border:0px">
+                  <h5 class="card-title">Post Idea</h5>
+                  <p class="card-text">Post Your Innovative Ideas Here</p>
+                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+              </center>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 12rem; border:0px">
+              <center>
+                <img src="pics/enterpreneur.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Find Pitcher</h5>
+                  <p class="card-text">Find Your Suitable Pitcher</p>
+                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+              </center>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 12rem; border:0px">
+              <center>
+                <img src="pics/artificial-intelligence.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Innovations</h5>
+                  <p class="card-text">Find Your Suitable Ideas</p>
+                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+              </center>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 12rem; border:0px">
+              <center>
+                <img src="pics/sponsor.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Get Investors</h5>
+                  <p class="card-text">Get Your Suitable Investors</p>
+                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p></p>
+      <p></p>
+      <hr>
+      <center>
+        <h1>Meet The Developers</h1>
+      </center>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <h5>Developed By:-</h5>
+            <div class="container text-center">
+              <div class="row">
+                <div class="col">
+                  <img src="pics/profile-removebg-preview.png" height="120" alt="">
+                </div>
+                <div class="col">
+                  <b>
+                    Mohit Garg<br>
+                    NIT JALANDHAR<br>
+                    CSE<br>
+                  </b>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <h5> Under The Guidance Of:- </h5>
+            <div class="container text-center">
+              <div class="row">
+                <div class="col">
+                  <img src="pics/sir.jpg" style="border-radius:50%" height="120" alt="">
+                </div>
+                <div class="col">
+                  <b>
+                    Rajesh Bansal Sir<br>
+                    CEO & FOUNDER OF <br>
+                    BANGALORE COMPUTERS EDUCATION<br>
+                  </b>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p></p>
+          <p></p>
+          <hr>
+          <h1>Reach Us</h1>
+          <div>
+            <center>
+              <div>
+                <img src="pics/facebook-icon-removebg-preview.png" height="70">
+                <img src="pics/twitter-bird-symbols-png-logo-0-removebg-preview.png" height="90">
+                <img src="pics/linked_in_icon-removebg-preview.png" height="70" style="border-radius:50%">
+              </div>
+            </center>
+          </div>
+          <div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.6622727596914!2d75.53365521499263!3d31.395874581410972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a51d30c180edf%3A0x5b7633718d17ef33!2sDr%20B%20R%20Ambedkar%20National%20Institute%20of%20Technology%20Jalandhar!5e0!3m2!1sen!2sin!4v1661013346574!5m2!1sen!2sin"
+              width="1000" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+
+          <p></p>
+          <p></p>
+          <center>
+            <div>
+              <img src="pics/copyright-removebg-preview.png" height="50" width="50">
+              <h5>Copyright Restricted</h5>
+            </div>
+          </center>
+        </div>
+        <div class="modal fade" id="signupmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:aqua;">
+                <h5 class="modal-title" id="exampleModalLabel">SignUp</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="signupemail" class="form-label">Email Address</label>
+                  <input type="email" class="form-control" id="signupemail" name="signupemail"
+                    aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="signuppassword" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="signuppassword" id="signuppassword">
+                </div>
+                <label class="form-label">Type</label>
+                <select id="type" name="type" class="form-select" aria-label="Default select example">
+                  <option selected>Select</option>
+                  <option value="pitcher">Pitcher</option>
+                  <option value="investor">Investor</option>
+                </select>
+              </div>
+              <div class="modal-footer" style="background-color:aqua;">
+                <center><button type="button" class="btn btn-primary" id="btnsignup">SignUp</button></center>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="loginmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:greenyellow;">
+                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="loginemail" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="loginemail" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="loginpassword" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="loginpassword">
+                </div>
+              </div>
+              <div class="modal-footer" style="background-color:greenyellow;">
+                <center><button class="btn btn-primary" id="btnlogin">Login</button> </center>
+              </div>
+            </div>
+          </div>
+        </div>
+  </form>
+</body>
+
+</html>
+
+
+<!-- WASTE -->
+<!-- <a id="btnlogin" href="/index.html"></a> -->
